@@ -198,6 +198,9 @@ class GenericContentsManager(ContentsManager, HasTraits):
             files_s3_detail = sync(
                 self.fs.fs.loop, self.fs.fs._lsdir, prefixed_path
             )
+            self.log.debug(
+                f"files_s3_detail_1={files_s3_detail}"
+            )
             filtered_files_s3_detail = list(
                 filter(
                     lambda detail: os.path.basename(detail["Key"])
@@ -206,13 +209,22 @@ class GenericContentsManager(ContentsManager, HasTraits):
                     files_s3_detail,
                 )
             )
+            self.log.debug(
+                f"files_s3_detail_2={filtered_files_s3_detail}"
+            )
             filtered_files_s3_detail = sync(
                 self.fs.fs.loop,
                 self.get_content_s3_metadata,
                 filtered_files_s3_detail,
             )
+            self.log.debug(
+                f"files_s3_detail_3={filtered_files_s3_detail}"
+            )
             filtered_files_s3_detail = self.filter_deleted_markers(
                 filtered_files_s3_detail
+            )
+            self.log.debug(
+                f"files_s3_detail_4={filtered_files_s3_detail}"
             )
             model['content'] = self.convert_s3_details_to_models(
                 filtered_files_s3_detail

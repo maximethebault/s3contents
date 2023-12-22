@@ -63,6 +63,8 @@ class S3FS(GenericFS):
     )
     delimiter = Unicode("/", help="Path delimiter").tag(config=True)
 
+    preferred_dir = Unicode("./", help="Preferred dir", env="JPYNB_PREFERRED_DIR").tag(config=True)
+
     dir_keep_file = Unicode(
         ".s3keep", help="Empty file to create when creating directories"
     ).tag(config=True)

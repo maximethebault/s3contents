@@ -217,9 +217,14 @@ class GenericContentsManager(ContentsManager, HasTraits):
                 self.get_content_s3_metadata,
                 filtered_files_s3_detail,
             )
-            filtered_files_s3_detail = self.filter_deleted_markers(
-                filtered_files_s3_detail
-            )
+            # This filter is broken for directories
+            # A directory s3 detail looks like this:
+            # {'Key': 'bucket/path/subdir', 'Size': 0, 'StorageClass': 'DIRECTORY', 'type': 'directory', 'size': 0, 'name': 'bucket/path/subdir'}
+            # furthermore, not sure this filtering is actually needed, as s3fs is configured as non-version-aware:
+            # https://github.com/fsspec/s3fs/blob/9954eeac848b34c5a457174129ea7315673cfa36/s3fs/core.py#L276
+            #filtered_files_s3_detail = self.filter_deleted_markers(
+            #    filtered_files_s3_detail
+            #)
             model['content'] = self.convert_s3_details_to_models(
                 filtered_files_s3_detail
             )

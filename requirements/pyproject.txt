@@ -8,7 +8,7 @@ aiobotocore[boto3]==2.4.2
     # via
     #   s3contents (pyproject.toml)
     #   s3fs
-aiohttp==3.9.4
+aiohttp==3.10.2
     # via
     #   aiobotocore
     #   s3fs
@@ -56,7 +56,7 @@ idna==3.4
     # via yarl
 iniconfig==2.0.0
     # via pytest
-jinja2==3.1.2
+jinja2==3.1.4
     # via nbconvert
 jmespath==1.0.1
     # via
@@ -136,7 +136,7 @@ tomli==2.0.1
     # via
     #   coverage
     #   pytest
-tornado==6.3.3
+tornado==6.4.1
     # via jupyter-client
 traitlets==5.9.0
     # via
@@ -145,7 +145,7 @@ traitlets==5.9.0
     #   nbclient
     #   nbconvert
     #   nbformat
-urllib3==1.26.17
+urllib3==1.26.18
     # via botocore
 webencodings==0.5.1
     # via

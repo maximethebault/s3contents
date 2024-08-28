@@ -38,7 +38,8 @@ class S3FS(GenericFS):
         help="S3/AWS secret access key", allow_none=True, default_value=None
     ).tag(config=True, env="JPYNB_S3_SECRET_ACCESS_KEY")
 
-    endpoint_url = Unicode("s3.amazonaws.com", help="S3 endpoint URL").tag(
+    # Leave endpoint_url empty by default (instead of forcing https://s3.amazonaws.com), as it can otherwise cause issues with more recent version of boto that tries to access the buket in path-style, which ultimately leads to PermanentRedirect errors when the bucket is not in the us-east-1 region
+    endpoint_url = Unicode(help="S3 endpoint URL", allow_none=True, default_value=None).tag(
         config=True, env="JPYNB_S3_ENDPOINT_URL"
     )
     region_name = Unicode("us-east-1", help="Region name").tag(

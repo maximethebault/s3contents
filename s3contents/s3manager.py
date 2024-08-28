@@ -27,7 +27,8 @@ class S3ContentsManager(GenericContentsManager):
 
     delimiter = Unicode("/", help="Path delimiter").tag(config=True)
 
-    endpoint_url = Unicode("https://s3.amazonaws.com", help="S3 endpoint URL").tag(
+    # Leave endpoint_url empty by default (instead of forcing https://s3.amazonaws.com), as it can otherwise cause issues with more recent version of boto that tries to access the buket in path-style, which ultimately leads to PermanentRedirect errors when the bucket is not in the us-east-1 region
+    endpoint_url = Unicode(help="S3 endpoint URL", allow_none=True, default_value=None).tag(
         config=True, env="JPY_S3_ENDPOINT_URL"
     )
 
@@ -98,6 +99,7 @@ class S3ContentsManager(GenericContentsManager):
             s3fs_additional_kwargs=self.s3fs_additional_kwargs,
             s3fs_config_kwargs=self.s3fs_config_kwargs,
         )
+
 
     def run_init_s3_hook(self):
         if self.init_s3_hook is not None:

@@ -67,6 +67,8 @@ allow-direct-references = true
 
 [tool.pytest.ini_options]
 testpaths = ["s3contents/tests"]
+log_file = "test.log"
+log_file_level = "DEBUG"
 addopts = [
   "-s",
   "-vv",
@@ -82,6 +84,7 @@ addopts = [
 markers = [
   "pkg: package tests",
   "minio: requires minio server (deselect with '-m \"not minio\"')",
+  "s3: requires s3 (deselect with '-m \"not s3\"')",
   "gcs: requires gcs creds (deselect with '-m \"not minio\"')",
 ]
 xfail_strict = true

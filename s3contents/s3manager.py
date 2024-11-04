@@ -42,6 +42,8 @@ class S3ContentsManager(GenericContentsManager):
 
     init_s3_hook = Any(help="optional hook for init'ing s3").tag(config=True)
 
+    preferred_dir = Unicode("./", help="Preferred dir", env="JPYNB_PREFERRED_DIR").tag(config=True)
+
     prefix = Unicode("", help="Prefix path inside the specified bucket").tag(
         config=True, env="JPY_S3_PREFIX"
     )
@@ -91,6 +93,7 @@ class S3ContentsManager(GenericContentsManager):
             kms_key_id=self.kms_key_id,
             log=self.log,
             prefix=self.prefix,
+            preferred_dir=self.preferred_dir,
             region_name=self.region_name,
             secret_access_key=self.secret_access_key,
             session_token=self.session_token,

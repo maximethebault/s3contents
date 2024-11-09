@@ -18,6 +18,7 @@ from s3contents.chunks import (
 from s3contents.genericfs import GenericFSError, NoSuchFile
 from s3contents.ipycompat import (
     Any,
+    FilesHandler,
     AuthenticatedFileHandler,
     ContentsManager,
     GenericFileCheckpoints,
@@ -62,7 +63,7 @@ class GenericContentsManager(ContentsManager, HasTraits):
 
     @default("files_handler_class")
     def _files_handler_class_default(self):
-        return AuthenticatedFileHandler
+        return FilesHandler
 
     @default("files_handler_params")
     def _files_handler_params_default(self):

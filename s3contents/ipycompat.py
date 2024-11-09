@@ -17,6 +17,7 @@ from nbformat.v4.rwbase import strip_transient
 ct_mgr_deps_loaded = False
 try:
     from jupyter_server.base.handlers import AuthenticatedFileHandler
+    from jupyter_server.files.handlers import FilesHandler
     from jupyter_server.services.contents.checkpoints import (
         Checkpoints,
         GenericCheckpointsMixin,
@@ -36,6 +37,7 @@ except ModuleNotFoundError:
 if not ct_mgr_deps_loaded:
     try:
         from notebook.base.handlers import AuthenticatedFileHandler
+        from notebook.files.handlers import FilesHandler
         from notebook.services.contents.checkpoints import (
             Checkpoints,
             GenericCheckpointsMixin,
